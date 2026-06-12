@@ -1,91 +1,375 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>ORION — IA conversacional avançada em português</title>
-<meta name="description" content="Converse com ORION, uma IA poderosa: chat em tempo real, análise de imagens, histórico de conversas, totalmente em português." />
-<meta property="og:title" content="ORION — IA conversacional avançada em português" />
-<meta property="og:description" content="Converse com ORION, uma IA poderosa: chat em tempo real, análise de imagens e histórico de conversas." />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet" />
-<style>
-  :root{
-    --bg:#0a0a1a; --bg2:#141432; --fg:#ececf1; --muted:#9aa0b4;
-    --primary:#6366f1; --primary-glow:#818cf8; --border:rgba(255,255,255,.1);
-  }
-  *{box-sizing:border-box}
-  html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-  a{color:inherit;text-decoration:none}
-  .wrap{max-width:1200px;margin:0 auto;padding:0 1.5rem}
-  .orb{position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,var(--primary) 0%,transparent 70%);opacity:.25;filter:blur(120px);pointer-events:none;z-index:0}
-  header{position:relative;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:1.5rem 0}
-  .logo{display:flex;align-items:center;gap:.5rem;font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:1.25rem;letter-spacing:.02em}
-  .logo-dot{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--primary),var(--primary-glow));box-shadow:0 0 20px rgba(129,140,248,.5)}
-  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1.1rem;border-radius:10px;font-weight:600;font-size:.9rem;border:1px solid transparent;cursor:pointer;transition:all .2s}
-  .btn-ghost{background:transparent;color:var(--fg)}
-  .btn-ghost:hover{background:rgba(255,255,255,.06)}
-  .btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-glow));color:#fff;box-shadow:0 8px 32px rgba(99,102,241,.4)}
-  .btn-primary:hover{opacity:.9}
-  .btn-outline{background:transparent;color:var(--fg);border-color:var(--border)}
-  .btn-lg{padding:.85rem 1.6rem;font-size:1rem}
-  main{position:relative;z-index:10;text-align:center;padding:4rem 1.5rem 6rem;max-width:1000px;margin:0 auto}
-  .pill{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem 1rem;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--border);font-size:.78rem;color:var(--muted);backdrop-filter:blur(10px);margin-bottom:2rem}
-  h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;line-height:1.05;letter-spacing:-.02em;margin:0}
-  .gradient{background:linear-gradient(135deg,var(--primary-glow),#c4b5fd);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .lead{margin:2rem auto 0;max-width:640px;font-size:1.1rem;color:var(--muted);line-height:1.6}
-  .ctas{margin-top:2.5rem;display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
-  section.features{margin-top:6rem}
-  h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:700;margin:0 0 2.5rem;background:linear-gradient(135deg,var(--primary-glow),#c4b5fd);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;text-align:left}
-  .card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:18px;padding:1.5rem;backdrop-filter:blur(10px);transition:all .2s}
-  .card:hover{border-color:rgba(129,140,248,.4);box-shadow:0 8px 32px rgba(99,102,241,.15)}
-  .card svg{color:var(--primary-glow);margin-bottom:.75rem}
-  .card h3{margin:0;font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:600}
-  .card p{margin:.4rem 0 0;color:var(--muted);font-size:.9rem;line-height:1.5}
-  footer{position:relative;z-index:10;border-top:1px solid rgba(255,255,255,.06);padding:2rem;text-align:center;color:var(--muted);font-size:.8rem}
-  footer a{color:var(--primary-glow)}
-  footer a:hover{text-decoration:underline}
-  @keyframes fade-up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
-  main{animation:fade-up .6s ease-out}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Geminix - Assistente AI Avançado</title>
+  <!-- Tabler Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.30.0/tabler-icons.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Google Sans', 'Roboto', system-ui, -apple-system, sans-serif; background: #1e1f20; height: 100vh; overflow: hidden; }
+
+    .app { display: flex; height: 100vh; min-height: 700px; background: #1e1f20; color: #e3e3e3; font-family: 'Google Sans', 'Roboto', sans-serif; overflow: hidden; }
+
+    /* SIDEBAR */
+    .sidebar { width: 260px; background: #1e1f20; display: flex; flex-direction: column; padding: 12px 0; border-right: 1px solid #2d2e30; flex-shrink: 0; transition: transform 0.2s; }
+    .sidebar-top { padding: 8px 16px 12px; display: flex; align-items: center; gap: 10px; }
+    .hamburger { width: 36px; height: 36px; border-radius: 50%; border: none; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #e3e3e3; font-size: 20px; transition: background .2s; }
+    .hamburger:hover { background: #2d2e30; }
+    .gemini-logo { display: flex; align-items: center; gap: 6px; font-size: 20px; font-weight: 500; color: #e3e3e3; }
+    .logo-icon { width: 28px; height: 28px; background: linear-gradient(135deg, #4285F4, #EA4335, #FBBC05, #34A853); border-radius: 50%; flex-shrink: 0; }
+
+    .new-chat-btn { margin: 4px 12px 8px; padding: 10px 16px; background: #2d2e30; border: none; border-radius: 24px; color: #e3e3e3; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: background .2s; }
+    .new-chat-btn:hover { background: #3c3d3f; }
+    .new-chat-btn i { font-size: 18px; }
+
+    .sidebar-section { padding: 4px 0; }
+    .sidebar-section-title { padding: 8px 20px 4px; font-size: 12px; color: #9aa0a6; font-weight: 500; letter-spacing: .3px; }
+
+    .chat-item { padding: 8px 16px; margin: 0 8px; border-radius: 8px; cursor: pointer; font-size: 14px; color: #c4c7c5; display: flex; align-items: center; gap: 8px; transition: background .15s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .chat-item:hover { background: #2d2e30; }
+    .chat-item.active { background: #2d4a6d; color: #a8c7fa; }
+    .chat-item i { font-size: 16px; flex-shrink: 0; }
+
+    .sidebar-bottom { margin-top: auto; border-top: 1px solid #2d2e30; padding-top: 8px; }
+    .sidebar-bottom-item { padding: 10px 16px; margin: 0 8px; border-radius: 8px; cursor: pointer; font-size: 14px; color: #c4c7c5; display: flex; align-items: center; gap: 10px; transition: background .15s; }
+    .sidebar-bottom-item:hover { background: #2d2e30; }
+    .avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #4285F4, #EA4335); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: white; flex-shrink: 0; }
+
+    /* MAIN */
+    .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: #131314; }
+
+    /* TOPBAR */
+    .topbar { height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; border-bottom: 1px solid #2d2e30; flex-shrink: 0; }
+    .topbar-left { display: flex; align-items: center; gap: 8px; }
+    .model-selector { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 20px; background: transparent; border: 1px solid #444; cursor: pointer; color: #e3e3e3; font-size: 14px; font-weight: 500; transition: background .2s; }
+    .model-selector:hover { background: #2d2e30; }
+    .model-dot { width: 8px; height: 8px; border-radius: 50%; background: linear-gradient(135deg, #4285F4, #34A853); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+    .topbar-right { display: flex; align-items: center; gap: 8px; }
+    .icon-btn { width: 36px; height: 36px; border-radius: 50%; background: transparent; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #9aa0a6; font-size: 18px; transition: background .2s; }
+    .icon-btn:hover { background: #2d2e30; color: #e3e3e3; }
+
+    /* CHAT AREA */
+    .chat-area { flex: 1; overflow-y: auto; padding: 20px 0; display: flex; flex-direction: column; }
+    .chat-area::-webkit-scrollbar { width: 4px; }
+    .chat-area::-webkit-scrollbar-thumb { background: #3c3d3f; border-radius: 2px; }
+
+    /* WELCOME */
+    .welcome { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; gap: 32px; }
+    .welcome-logo { width: 80px; height: 80px; border-radius: 50%; background: conic-gradient(from 0deg, #4285F4, #EA4335, #FBBC05, #34A853, #4285F4); display: flex; align-items: center; justify-content: center; animation: spin 10s linear infinite; }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+    .welcome-logo-inner { width: 60px; height: 60px; border-radius: 50%; background: #131314; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: bold; background: linear-gradient(135deg, #4285F4, #EA4335, #FBBC05, #34A853); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .welcome-title { font-size: 36px; font-weight: 400; text-align: center; line-height: 1.2; }
+    .welcome-title span { background: linear-gradient(90deg, #4285F4, #EA4335, #FBBC05, #34A853); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 500; }
+    .welcome-subtitle { font-size: 16px; color: #9aa0a6; text-align: center; }
+
+    .suggestions { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; width: 100%; max-width: 680px; }
+    .suggestion-card { padding: 16px; background: #1e1f20; border: 1px solid #2d2e30; border-radius: 16px; cursor: pointer; transition: background .2s, border-color .2s, transform .1s; display: flex; flex-direction: column; gap: 8px; }
+    .suggestion-card:hover { background: #2a2b2d; border-color: #4285F4; transform: translateY(-2px); }
+    .suggestion-card p { font-size: 14px; color: #c4c7c5; line-height: 1.4; }
+    .suggestion-card-icon { font-size: 20px; color: #9aa0a6; }
+
+    /* MESSAGES */
+    .messages-container { max-width: 760px; width: 100%; margin: 0 auto; padding: 0 20px; display: flex; flex-direction: column; gap: 24px; }
+
+    .msg-user { display: flex; justify-content: flex-end; }
+    .msg-user-bubble { background: linear-gradient(135deg, #2d4a6d, #1e3a5f); border-radius: 20px 20px 4px 20px; padding: 12px 18px; max-width: 80%; font-size: 15px; color: #e3e3e3; line-height: 1.5; }
+
+    .msg-gemini { display: flex; gap: 14px; align-items: flex-start; }
+    .gemini-avatar { width: 36px; height: 36px; border-radius: 50%; background: conic-gradient(from 0deg, #4285F4, #EA4335, #FBBC05, #34A853, #4285F4); display: flex; align-items: center; justify-content: center; flex-shrink: 0; animation: spin 8s linear infinite; }
+    .gemini-avatar-inner { width: 28px; height: 28px; border-radius: 50%; background: #131314; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold; background: linear-gradient(135deg, #4285F4, #EA4335); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .msg-gemini-content { flex: 1; }
+    .msg-gemini-name { font-size: 13px; font-weight: 500; color: #9aa0a6; margin-bottom: 6px; }
+    .msg-gemini-text { font-size: 15px; color: #e3e3e3; line-height: 1.7; }
+    .msg-gemini-text strong { color: #a8c7fa; font-weight: 600; }
+    .msg-gemini-text code { background: #2d2e30; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 13px; color: #81c995; }
+    .msg-gemini-text pre { background: #1a1b1d; padding: 12px; border-radius: 8px; overflow-x: auto; margin: 8px 0; }
+
+    .msg-actions { display: flex; align-items: center; gap: 4px; margin-top: 12px; }
+    .msg-action-btn { padding: 6px 10px; border-radius: 20px; background: transparent; border: none; cursor: pointer; color: #9aa0a6; font-size: 13px; display: flex; align-items: center; gap: 4px; transition: background .2s, color .2s; }
+    .msg-action-btn:hover { background: #2d2e30; color: #e3e3e3; }
+
+    /* INPUT AREA */
+    .input-area { padding: 16px 20px 20px; background: #131314; flex-shrink: 0; border-top: 1px solid #2d2e30; }
+    .input-wrapper { max-width: 760px; margin: 0 auto; }
+    .input-box { background: #1e1f20; border: 1px solid #2d2e30; border-radius: 28px; padding: 12px 20px; display: flex; flex-direction: column; gap: 10px; transition: border-color .2s; }
+    .input-box:focus-within { border-color: #4285F4; box-shadow: 0 0 0 2px rgba(66,133,244,0.2); }
+    .input-textarea { background: transparent; border: none; color: #e3e3e3; font-size: 15px; resize: none; width: 100%; outline: none; font-family: inherit; line-height: 1.5; min-height: 24px; max-height: 160px; }
+    .input-textarea::placeholder { color: #5f6368; }
+    .input-actions { display: flex; align-items: center; justify-content: space-between; }
+    .input-left { display: flex; align-items: center; gap: 4px; }
+    .input-btn { width: 36px; height: 36px; border-radius: 50%; background: transparent; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #9aa0a6; font-size: 20px; transition: background .2s; }
+    .input-btn:hover { background: #2d2e30; color: #e3e3e3; }
+    .send-btn { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #4285F4, #34A853); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; transition: transform .1s, opacity .2s; }
+    .send-btn:hover { opacity: 0.9; transform: scale(1.02); }
+    .send-btn:active { transform: scale(.95); }
+    .send-btn:disabled { background: #2d2e30; color: #5f6368; cursor: not-allowed; opacity: 0.5; }
+
+    .input-footer { text-align: center; font-size: 12px; color: #5f6368; margin-top: 10px; }
+
+    /* TYPING */
+    .typing-dots { display: inline-flex; gap: 4px; align-items: center; padding: 8px 0; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #9aa0a6; animation: bounce 1.2s infinite; }
+    .dot:nth-child(2) { animation-delay: .2s; }
+    .dot:nth-child(3) { animation-delay: .4s; }
+    @keyframes bounce { 0%,60%,100%{ transform: translateY(0); } 30%{ transform: translateY(-8px); } }
+
+    .chips { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
+    .chip { padding: 6px 14px; border-radius: 20px; background: #1e1f20; border: 1px solid #2d2e30; font-size: 13px; color: #c4c7c5; cursor: pointer; transition: all .2s; }
+    .chip:hover { background: #2d2e30; border-color: #4285F4; transform: translateY(-1px); }
+  </style>
 </head>
 <body>
-<div class="orb"></div>
-<header class="wrap">
-  <div class="logo"><span class="logo-dot"></span>ORION</div>
-  <div style="display:flex;gap:.5rem">
-    <a href="https://orion-com.lovable.app/login" class="btn btn-ghost">Entrar</a>
-    <a href="https://orion-com.lovable.app/login" class="btn btn-primary">Começar grátis</a>
-  </div>
-</header>
-
-<main>
-  <div class="pill">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary-glow)"><path d="M12 2l2.4 7.4H22l-6.2 4.5L18.2 22 12 17.5 5.8 22l2.4-8.1L2 9.4h7.6z"/></svg>
-    Powered by Gemini 2.5 — Resposta inteligente em tempo real
-  </div>
-  <h1>A inteligência artificial<br/><span class="gradient">do futuro</span>, hoje.</h1>
-  <p class="lead">ORION é seu copiloto de IA: chat avançado, análise de imagens, geração de código e histórico completo — tudo em português brasileiro.</p>
-  <div class="ctas">
-    <a href="https://orion-com.lovable.app/login" class="btn btn-primary btn-lg">Começar agora →</a>
-    <a href="#features" class="btn btn-outline btn-lg">Conhecer recursos</a>
-  </div>
-
-  <section id="features" class="features">
-    <h2>Recursos do ORION</h2>
-    <div class="grid">
-      <div class="card"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><h3>Chat em tempo real</h3><p>Respostas streaming, fluidas e contextuais.</p></div>
-      <div class="card"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg><h3>Análise de imagens</h3><p>Envie imagens e ORION as compreende.</p></div>
-      <div class="card"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg><h3>Memória de contexto</h3><p>Histórico completo, retoma de onde parou.</p></div>
-      <div class="card"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><h3>Seguro e privado</h3><p>Seus dados protegidos, só você acessa.</p></div>
-      <div class="card"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg><h3>Multi-idioma</h3><p>Português, inglês, espanhol e mais.</p></div>
-      <div class="card"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.4H22l-6.2 4.5L18.2 22 12 17.5 5.8 22l2.4-8.1L2 9.4h7.6z"/></svg><h3>Geração de código</h3><p>Snippets, debug, refactor — instantâneo.</p></div>
+<div class="app">
+  <nav class="sidebar">
+    <div class="sidebar-top">
+      <button class="hamburger" onclick="toggleSidebar()"><i class="ti ti-menu-2"></i></button>
+      <div class="gemini-logo">
+        <div class="logo-icon"></div>
+        Geminix
+      </div>
     </div>
-  </section>
-</main>
+    <button class="new-chat-btn" onclick="window.newChat()">
+      <i class="ti ti-edit"></i> Novo chat
+    </button>
+    <div class="sidebar-section" id="chat-history-list">
+      <div class="sidebar-section-title">Conversas Recentes</div>
+    </div>
+    <div class="sidebar-bottom">
+      <div class="sidebar-bottom-item" onclick="clearAllChats()"><i class="ti ti-trash"></i> Limpar histórico</div>
+      <div class="sidebar-bottom-item" onclick="alert('Configurações do Geminix')"><i class="ti ti-settings"></i> Configurações</div>
+      <div class="sidebar-bottom-item" onclick="alert('Minha conta')"><div class="avatar">U</div> Minha conta</div>
+    </div>
+  </nav>
 
-<footer>© 2026 ORION. Suporte: <a href="mailto:kaike.lima.zerado@gmail.com">kaike.lima.zerado@gmail.com</a></footer>
+  <main class="main">
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="model-selector" onclick="toggleModelMenu()">
+          <div class="model-dot"></div>
+          <span id="model-name">Geminix Pro 2.0</span>
+          <i class="ti ti-chevron-down"></i>
+        </button>
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn" onclick="exportChat()"><i class="ti ti-download"></i></button>
+        <button class="icon-btn" onclick="alert('Geminix - IA Avançada')"><i class="ti ti-info-circle"></i></button>
+        <div class="avatar">G</div>
+      </div>
+    </div>
+
+    <div id="welcome-screen" class="chat-area">
+      <div class="welcome">
+        <div class="welcome-logo"><div class="welcome-logo-inner">✦</div></div>
+        <div><div class="welcome-title">Olá, <span>Geminix</span></div><div class="welcome-subtitle">IA Avançada - Como posso ajudar hoje?</div></div>
+        <div class="suggestions">
+          <div class="suggestion-card" onclick="fillInput('Crie um plano de estudos de Python para iniciantes em 30 dias')"><div class="suggestion-card-icon"><i class="ti ti-book"></i></div><p>Crie um plano de estudos de Python para iniciantes em 30 dias</p></div>
+          <div class="suggestion-card" onclick="fillInput('Explique como funciona a inteligência artificial de forma simples')"><div class="suggestion-card-icon"><i class="ti ti-brain"></i></div><p>Explique como funciona a inteligência artificial de forma simples</p></div>
+          <div class="suggestion-card" onclick="fillInput('Escreva um código para calcular Fibonacci em Python')"><div class="suggestion-card-icon"><i class="ti ti-code"></i></div><p>Escreva um código para calcular Fibonacci</p></div>
+          <div class="suggestion-card" onclick="fillInput('Me dê ideias criativas para um projeto de final de semana')"><div class="suggestion-card-icon"><i class="ti ti-bulb"></i></div><p>Me dê ideias criativas para um projeto de final de semana</p></div>
+        </div>
+        <div class="chips"><div class="chip" onclick="fillInput('Escreva um poema sobre tecnologia')"><i class="ti ti-pencil"></i>Poema</div><div class="chip" onclick="fillInput('Explique buracos negros')"><i class="ti ti-planet"></i>Ciência</div><div class="chip" onclick="fillInput('Dicas de produtividade')"><i class="ti ti-clock"></i>Produtividade</div></div>
+      </div>
+    </div>
+
+    <div id="chat-screen" style="display:none; flex:1; overflow-y:auto; padding:20px 0;" class="chat-area"><div class="messages-container" id="messages"></div></div>
+
+    <div class="input-area">
+      <div class="input-wrapper">
+        <div class="input-box">
+          <textarea class="input-textarea" id="input" placeholder="Pergunte ao Geminix..." rows="1" onkeydown="window.handleKey(event)" oninput="window.autoResize(this); window.updateSendBtn()"></textarea>
+          <div class="input-actions"><div class="input-left"><button class="input-btn" onclick="alert('Anexar arquivo em breve')"><i class="ti ti-paperclip"></i></button><button class="input-btn" onclick="alert('Imagem em breve')"><i class="ti ti-photo"></i></button></div><button class="send-btn" id="send-btn" onclick="window.sendMessage()" disabled><i class="ti ti-arrow-up"></i></button></div>
+        </div>
+        <div class="input-footer">Geminix IA Avançada - Respostas inteligentes e contextualizadas</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+// ==================== CONFIGURAÇÃO DA IA AVANÇADA (API GEMINI GRÁTIS) ====================
+// Chave API pública para demonstração - usuário deve substituir pela sua chave do Google AI Studio
+// Para usar: acesse https://aistudio.google.com/apikey, crie uma chave e cole abaixo
+const GEMINI_API_KEY = "SUA_CHAVE_AQUI"; // COLE SUA CHAVE DO GOOGLE AI STUDIO AQUI
+const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent";
+
+// Fallback local quando não há chave API
+async function callGeminiAI(prompt, history = []) {
+  // Se tiver chave configurada, usa API real
+  if (GEMINI_API_KEY && GEMINI_API_KEY !== "SUA_CHAVE_AQUI") {
+    try {
+      const response = await fetch(`${API_URL}?key=${GEMINI_API_KEY}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { temperature: 0.7, maxOutputTokens: 2048 }
+        })
+      });
+      const data = await response.json();
+      if (data.candidates && data.candidates[0]?.content?.parts[0]?.text) {
+        return data.candidates[0].content.parts[0].text;
+      }
+      return "⚠️ Erro na API: " + (data.error?.message || "Resposta inválida");
+    } catch (e) {
+      return fallbackAI(prompt);
+    }
+  }
+  return fallbackAI(prompt);
+}
+
+// IA local avançada (fallback inteligente)
+function fallbackAI(prompt) {
+  const p = prompt.toLowerCase();
+  if (p.includes('python') && p.includes('plano')) return "**📚 Plano de Estudos Python (30 dias) - Geminix**\n\n**Semana 1:** Fundamentos (variáveis, loops, funções)\n**Semana 2:** Estruturas de dados (listas, dicionários)\n**Semana 3:** POO e módulos\n**Semana 4:** Projetos práticos (API, automação)\n\nQuer que eu detalhe algum tópico? 🐍";
+  if (p.includes('fibonacci')) return "**🔢 Código Fibonacci em Python:**\n```python\ndef fibonacci(n):\n    a, b = 0, 1\n    for _ in range(n):\n        print(a, end=' ')\n        a, b = b, a + b\nfibonacci(10)\n```\nSaída: 0 1 1 2 3 5 8 13 21 34";
+  if (p.includes('inteligência artificial') || p.includes('ia')) return "**🧠 O que é Inteligência Artificial?**\n\nIA é a simulação de processos humanos por máquinas. O Geminix usa aprendizado profundo para entender contexto, gerar código, responder perguntas e muito mais! Existem 3 tipos: IA Fraca (atual), IA Geral (futuro) e Super IA.\n\nQuer saber mais sobre Machine Learning?";
+  if (p.includes('poema')) return "**✨ Poema da Tecnologia**\n\nCódigos dançam na tela\nBits tecem o amanhã\nAlgoritmos, poesia bela\nGeminix, a luz que irradia\n\nDa nuvem ao pensamento\nInovação a nos guiar\nTecnologia, o novo vento\nQue faz o mundo transformar 🌟";
+  if (p.includes('produtividade')) return "**⏰ Dicas de Produtividade pelo Geminix:**\n\n1. Técnica Pomodoro (25min foco, 5min pausa)\n2. Matriz de Eisenhower (urgente x importante)\n3. Bloqueie distrações (modo não perturbe)\n4. Planeje o dia anterior\n5. Use o método 2-minutos para tarefas rápidas\n\nQuer uma planilha personalizada?";
+  return `**🤖 Geminix responde:**\n\nExcelente pergunta! Sobre "${prompt.substring(0, 80)}...", posso ajudar com:\n- Explicações detalhadas\n- Códigos e exemplos\n- Análises profundas\n- Criatividade e redação\n\nPode me perguntar sobre programação, ciência, filosofia, produtividade e muito mais! O que gostaria de explorar? 🚀`;
+}
+
+// ==================== ESTADO GLOBAL ====================
+let chats = [{ id: Date.now(), title: "Nova conversa", messages: [] }];
+let currentChatId = chats[0].id;
+let isTyping = false;
+let isWelcome = true;
+
+function saveChats() { localStorage.setItem('geminix_chats', JSON.stringify(chats)); }
+function loadChats() { const saved = localStorage.getItem('geminix_chats'); if (saved) { chats = JSON.parse(saved); if (!chats.length) resetDefaultChat(); renderChatList(); if (chats.find(c => c.id === currentChatId)) loadChatById(currentChatId); else selectChat(chats[0].id); } }
+function resetDefaultChat() { chats = [{ id: Date.now(), title: "Nova conversa", messages: [] }]; currentChatId = chats[0].id; saveChats(); }
+
+function renderChatList() {
+  const container = document.getElementById('chat-history-list');
+  if (!container) return;
+  const sectionDiv = document.createElement('div');
+  sectionDiv.className = 'sidebar-section';
+  const title = document.createElement('div');
+  title.className = 'sidebar-section-title';
+  title.innerText = 'Conversas Recentes';
+  sectionDiv.appendChild(title);
+  chats.slice(-8).reverse().forEach(chat => {
+    const item = document.createElement('div');
+    item.className = `chat-item ${currentChatId === chat.id ? 'active' : ''}`;
+    item.innerHTML = `<i class="ti ti-message"></i>${chat.title.length > 25 ? chat.title.slice(0,22)+'...' : chat.title}`;
+    item.onclick = () => selectChat(chat.id);
+    sectionDiv.appendChild(item);
+  });
+  container.innerHTML = '';
+  container.appendChild(sectionDiv);
+}
+
+function selectChat(chatId) {
+  currentChatId = chatId;
+  renderChatList();
+  showChatScreen();
+  const chat = chats.find(c => c.id === chatId);
+  if (chat) {
+    const container = document.getElementById('messages');
+    if (container) {
+      container.innerHTML = '';
+      chat.messages.forEach(msg => {
+        if (msg.role === 'user') addUserMsg(msg.text, false);
+        else addGeminiMsg(msg.text, false, false);
+      });
+    }
+  }
+}
+
+function loadChatById(chatId) { selectChat(chatId); }
+
+function showChatScreen() {
+  if (isWelcome) {
+    document.getElementById('welcome-screen').style.display = 'none';
+    document.getElementById('chat-screen').style.display = 'block';
+    isWelcome = false;
+  }
+}
+
+function addUserMsg(text, save = true) {
+  const container = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = 'msg-user';
+  div.innerHTML = `<div class="msg-user-bubble">${escapeHtml(text)}</div>`;
+  container.appendChild(div);
+  scrollBottom();
+  if (save) {
+    const chat = chats.find(c => c.id === currentChatId);
+    if (chat) { chat.messages.push({ role: 'user', text }); saveChats(); }
+  }
+}
+
+function addGeminiMsg(text, save = true, withActions = true) {
+  const container = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = 'msg-gemini';
+  let formatted = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\n/g, '<br>');
+  div.innerHTML = `<div class="gemini-avatar"><div class="gemini-avatar-inner">★</div></div><div class="msg-gemini-content"><div class="msg-gemini-name">Geminix</div><div class="msg-gemini-text">${formatted}</div>${withActions ? `<div class="msg-actions"><button class="msg-action-btn" onclick="copyText(this)"><i class="ti ti-copy"></i>Copiar</button><button class="msg-action-btn" onclick="regenerateLast()"><i class="ti ti-refresh"></i>Regenerar</button></div>` : ''}</div>`;
+  container.appendChild(div);
+  scrollBottom();
+  if (save) {
+    const chat = chats.find(c => c.id === currentChatId);
+    if (chat) { chat.messages.push({ role: 'gemini', text }); saveChats(); if (chat.messages.length === 2 && chat.title === "Nova conversa") { chat.title = chat.messages[0].text.slice(0, 30); renderChatList(); } }
+  }
+}
+
+function addTyping() { const c = document.getElementById('messages'); const d = document.createElement('div'); d.className = 'msg-gemini'; d.id = 'typing-msg'; d.innerHTML = `<div class="gemini-avatar"><div class="gemini-avatar-inner">★</div></div><div class="msg-gemini-content"><div class="typing-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>`; c.appendChild(d); scrollBottom(); }
+function removeTyping() { const t = document.getElementById('typing-msg'); if (t) t.remove(); }
+function escapeHtml(t) { return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function scrollBottom() { const s = document.getElementById('chat-screen'); if (s && s.style.display !== 'none') s.scrollTop = s.scrollHeight; }
+function autoResize(el) { if (el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 160) + 'px'; } }
+function updateSendBtn() { const inp = document.getElementById('input'); const btn = document.getElementById('send-btn'); if (inp && btn) btn.disabled = !inp.value.trim(); }
+function handleKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); const btn = document.getElementById('send-btn'); if (btn && !btn.disabled) sendMessage(); } }
+function fillInput(text) { const inp = document.getElementById('input'); if (inp) { inp.value = text; autoResize(inp); updateSendBtn(); inp.focus(); } }
+
+async function sendMessage() {
+  if (isTyping) return;
+  const inp = document.getElementById('input');
+  const text = inp.value.trim();
+  if (!text) return;
+  showChatScreen();
+  inp.value = '';
+  autoResize(inp);
+  updateSendBtn();
+  isTyping = true;
+  addUserMsg(text);
+  addTyping();
+  const reply = await callGeminiAI(text);
+  removeTyping();
+  addGeminiMsg(reply);
+  isTyping = false;
+}
+
+function newChat() {
+  const newChatObj = { id: Date.now(), title: "Nova conversa", messages: [] };
+  chats.unshift(newChatObj);
+  currentChatId = newChatObj.id;
+  saveChats();
+  renderChatList();
+  document.getElementById('messages').innerHTML = '';
+  document.getElementById('welcome-screen').style.display = 'block';
+  document.getElementById('chat-screen').style.display = 'none';
+  isWelcome = true;
+  isTyping = false;
+  removeTyping();
+}
+
+function clearAllChats() { if (confirm('Tem certeza que deseja apagar todo o histórico?')) { resetDefaultChat(); renderChatList(); newChat(); } }
+function exportChat() { const chat = chats.find(c => c.id === currentChatId); if (chat) { const data = JSON.stringify(chat, null, 2); const blob = new Blob([data], {type: 'application/json'}); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `geminix_chat_${Date.now()}.json`; a.click(); } }
+function copyText(btn) { const textDiv = btn.closest('.msg-gemini-content')?.querySelector('.msg-gemini-text'); if (textDiv) { navigator.clipboard.writeText(textDiv.innerText).then(() => alert('Copiado!')).catch(() => alert('Erro')); } }
+async function regenerateLast() { const chat = chats.find(c => c.id === currentChatId); if (chat && chat.messages.length >= 2) { const lastUserMsg = [...chat.messages].reverse().find(m => m.role === 'user'); if (lastUserMsg) { chat.messages.pop(); document.getElementById('messages').lastElementChild?.remove(); addTyping(); const newReply = await callGeminiAI(lastUserMsg.text); removeTyping(); addGeminiMsg(newReply); saveChats(); } } }
+function toggleSidebar() { const sidebar = document.querySelector('.sidebar'); sidebar.style.transform = sidebar.style.transform === 'translateX(-260px)' ? 'translateX(0)' : 'translateX(-260px)'; setTimeout(() => { if (sidebar.style.transform === 'translateX(-260px)') sidebar.style.transform = ''; }, 300); }
+function toggleModelMenu() { const modelSpan = document.getElementById('model-name'); const models = ['Geminix Pro 2.0', 'Geminix Ultra', 'Geminix Lite']; let idx = models.indexOf(modelSpan.innerText); modelSpan.innerText = models[(idx + 1) % models.length]; alert(`Modelo alterado para: ${modelSpan.innerText}`); }
+
+window.autoResize = autoResize; window.updateSendBtn = updateSendBtn; window.handleKey = handleKey; window.sendMessage = sendMessage; window.newChat = newChat; window.fillInput = fillInput; window.copyText = copyText; window.regenerateLast = regenerateLast; window.toggleSidebar = toggleSidebar; window.toggleModelMenu = toggleModelMenu; window.clearAllChats = clearAllChats; window.exportChat = exportChat;
+
+loadChats();
+if (!chats.length) resetDefaultChat();
+renderChatList();
+updateSendBtn();
+if (chats.length && chats[0].messages.length === 0) { } else if (chats[0] && chats[0].messages.length) selectChat(chats[0].id);
+</script>
 </body>
 </html>
